@@ -1,6 +1,13 @@
-# Changelog — DocDFAED
+# Journal des modifications — wiki-DocDFAED
 
-## [Unreleased]
+Tous les changements notables de ce projet sont documentés ici.
+Format : [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
+
+---
+
+## [Non publié]
+
+*(Aucun changement en attente de la prochaine version.)*
 
 ---
 
@@ -8,12 +15,21 @@
 
 ### Ajouts
 
-- Environnement Docker initial basé sur l'architecture du wiki DFAED-NG.
-- Stack : MediaWiki 1.31.16, Semantic MediaWiki 3.2.3, PHP 7.4, MariaDB 10.4.
-- `LocalSettings.php` avec chargement des assets DSFR via `BeforePageDisplay` (port 8081).
-- Extension WikiEditor activée.
-- Workflow copy-paste `staging_area/` → pages `MediaWiki:`.
-- Architecture "Zéro FOUC" : overlay blanc via `Common.js` + CSS préchargé via `LocalSettings.php`.
-- Thème DSFR v1.12.1 : Header, Footer, Layout, EditPage, Config.
-- Composants DSFR actifs : Accordion, Alert, Badge.
-- 50+ stubs de composants préparés pour implémentation future.
+- **Environnement Docker** basé sur l'architecture du wiki DFAED-NG.
+  - Stack : MediaWiki 1.31.16, Semantic MediaWiki 3.2.3, PHP 7.4, MariaDB 10.4.
+  - Port **8081** (8080 réservé à DFAED-NG).
+  - Volume DB : `db_data_docdfa`.
+- **`LocalSettings.php`** : configuration MediaWiki avec sitename *DocDFAED*, chargement des assets DSFR v1.12.1 (CDN jsDelivr) et des assets locaux via hook `BeforePageDisplay`.
+- **Extension WikiEditor** activée.
+- **Workflow copy-paste** `staging_area/` → pages `MediaWiki:`.
+- **Architecture "Zéro FOUC"** : overlay blanc injecté immédiatement par `Common.js` + CSS DSFR préchargé côté serveur.
+- **Thème DSFR complet** (porté depuis DFAED-NG) :
+  - `Common.js` : orchestrateur de chargement avec anti-FOUC et détection d'environnement.
+  - `dsfr/Config.js` : navigation spécifique DocDFAED — **7 entrées** : Accueil (lien direct), Documentation (sous-menus : ASQ, Veille professionnelle), Formation (Formations internes, Formations externes), Planning (Consultation, Gestion), OCE (Consultation, Gestion), Historique (lien direct), Application FAED (lien direct).
+  - `dsfr/Layout.js` : nettoyage DOM MediaWiki + fil d'Ariane dynamique.
+  - `dsfr/Header.js` : header DSFR avec polling jQuery/mw.util, menus de navigation et authentification.
+  - `dsfr/Footer.js` : footer Marianne avec modale d'outils.
+  - `dsfr/EditPage.js` : barre d'édition DSFR avec icônes SVG personnalisées.
+  - `Common.css` + `dsfr/Style.css` : surcharges CSS DSFR.
+- **Composants DSFR actifs** : Accordion, Alert, Badge (portés depuis DFAED-NG).
+- **49 stubs de composants DSFR** prêts à implémenter (liste complète dans `staging_area/dsfr/components/`).

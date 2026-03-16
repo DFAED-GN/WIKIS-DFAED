@@ -54,6 +54,7 @@ var fn = function() {};
 - `Dockerfile` — image PHP 7.4 + MW 1.31.16 + SMW via Composer
 - `LocalSettings.php` — config MW + chargement des assets DSFR locaux
 - `staging_area/` — tout le code métier (JS/CSS)
+- `CHANGELOG.md` — historique des versions et modifications
 
 ### Commandes fréquentes
 

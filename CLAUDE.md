@@ -23,15 +23,20 @@ La mission en cours est de **transformer l'interface des deux wikis avec le desi
 WIKIS-DFAED/
 ├── CLAUDE.md               ← ce fichier
 ├── README.md               ← vue d'ensemble générale
+├── CHANGELOG.md            ← résumé des versions des deux wikis
 ├── wiki-DFAED-NG/          ← chantier DSFR actif (wiki enquêteurs)
 │   ├── CLAUDE.md           ← règles techniques détaillées pour ce wiki
 │   ├── README.md           ← doc de démarrage rapide
+│   ├── CHANGELOG.md        ← historique des versions DFAED-NG
 │   ├── docker-compose.yml
 │   ├── Dockerfile
 │   ├── LocalSettings.php
 │   ├── staging_area/       ← tout le code JS/CSS à développer ici
 │   └── imports_externes/   ← exports XML MediaWiki pour le dev
 └── wiki-DocDFAED/          ← chantier actif (wiki interne département)
+    ├── CLAUDE.md           ← règles techniques détaillées pour ce wiki
+    ├── README.md           ← doc de démarrage rapide
+    └── CHANGELOG.md        ← historique des versions DocDFAED
 ```
 
 ---

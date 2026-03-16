@@ -54,6 +54,7 @@ Cette transformation se fait **sans modifier le cœur de MediaWiki** : elle repo
 WIKIS-DFAED/
 ├── README.md               ← ce fichier
 ├── CLAUDE.md               ← instructions pour Claude Code
+├── CHANGELOG.md            ← résumé des versions des deux wikis
 │
 ├── wiki-DFAED-NG/          ← chantier DSFR actif
 │   ├── README.md           ← démarrage rapide (Docker)
