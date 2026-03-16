@@ -658,6 +658,22 @@ body.action-submit textarea:focus {
   outline: none !important;
 }
 
+/* Protéger le textarea curseur interne de CodeMirror contre les styles DSFR globaux */
+/* Ce textarea (1px) est utilisé par CodeMirror pour gérer la saisie clavier */
+body.action-edit .CodeMirror textarea,
+body.action-submit .CodeMirror textarea {
+  width: 1px !important;
+  min-height: 0 !important;
+  height: 1em !important;
+  padding: 0 !important;
+  border: none !important;
+  border-bottom: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  transition: none !important;
+}
+
 /* Main edit textarea */
 body.action-edit #wpTextbox1,
 body.action-submit #wpTextbox1,
