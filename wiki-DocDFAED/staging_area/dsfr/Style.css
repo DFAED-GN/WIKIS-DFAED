@@ -659,7 +659,7 @@ body.action-submit textarea:focus {
 }
 
 /* Protéger le textarea curseur interne de CodeMirror contre les styles DSFR globaux */
-/* Ce textarea (1px) est utilisé par CodeMirror pour gérer la saisie clavier */
+/* Ce textarea (1px) gère la saisie clavier — ne pas le redimensionner */
 body.action-edit .CodeMirror textarea,
 body.action-submit .CodeMirror textarea {
   width: 1px !important;
@@ -674,21 +674,34 @@ body.action-submit .CodeMirror textarea {
   transition: none !important;
 }
 
-/* Main edit textarea */
-body.action-edit #wpTextbox1,
-body.action-submit #wpTextbox1,
-body.action-edit .wikiEditor-ui-text > textarea {
+/* CodeMirror — intégration visuelle DSFR */
+/* CodeMirror est l'éditeur actif ; le textarea #wpTextbox1 est caché derrière */
+body.action-edit .CodeMirror,
+body.action-submit .CodeMirror {
+  border: 1px solid #dddddd !important;
+  border-top: none !important;
+  border-radius: 0 0 0.5rem 0.5rem !important;
+  min-height: 60vh !important;
+  font-family: "Courier New", Consolas, monospace !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Fallback : textarea #wpTextbox1 visible si CodeMirror est désactivé */
+body.action-edit #wpTextbox1:not([style*="display: none"]),
+body.action-submit #wpTextbox1:not([style*="display: none"]) {
   width: 100% !important;
-  min-height: 500px !important;
+  min-height: 60vh !important;
   font-family: "Courier New", Consolas, monospace !important;
   font-size: 0.95rem !important;
   line-height: 1.6 !important;
   padding: 1rem !important;
   background-color: #ffffff !important;
   border: 1px solid #dddddd !important;
+  border-top: none !important;
   border-radius: 0 0 0.5rem 0.5rem !important;
   resize: vertical !important;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05) !important;
+  box-shadow: none !important;
 }
 
 body.action-edit #wpTextbox1:focus,

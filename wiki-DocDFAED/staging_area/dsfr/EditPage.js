@@ -109,11 +109,9 @@
         }, 100);
 
         // 2. TEXTAREA & TOOLBAR
+        // Le textarea #wpTextbox1 est caché par CodeMirror — on ne le stylise pas.
+        // CodeMirror est l'éditeur affiché ; ses styles visuels DSFR sont dans Style.css.
         var $textarea = $('#wpTextbox1');
-        $textarea.addClass('fr-input').css({
-            'font-family': 'monospace', 'min-height': '60vh', 'border-radius': '0 0 4px 4px', 
-            'border-top': '1px solid #eee', 'margin-top': '0', 'width': '100%', 'padding': '1rem'
-        });
 
         if ($('#dsfr-editor-toolbar').length) $('#dsfr-editor-toolbar').remove();
         
@@ -316,7 +314,23 @@
             // Close all color pickers too
             $('.dsfr-color-picker').removeClass('dsfr-color-picker--open');
         });
-        $grp.append($compLi); $dsfrToolbar.append($grp); $textarea.before($dsfrToolbar);
+        $grp.append($compLi); $dsfrToolbar.append($grp);
+
+        // Insérer la toolbar avant CodeMirror (éditeur actif).
+        // Polling court car CodeMirror peut s'initialiser après notre script.
+        var cmToolbarAttempts = 0;
+        var cmToolbarInterval = setInterval(function() {
+            var $cm = $('.CodeMirror').first();
+            if ($cm.length) {
+                $cm.before($dsfrToolbar);
+                clearInterval(cmToolbarInterval);
+            } else if (cmToolbarAttempts >= 20) {
+                // Fallback : CodeMirror absent (désactivé par l'utilisateur)
+                $textarea.before($dsfrToolbar);
+                clearInterval(cmToolbarInterval);
+            }
+            cmToolbarAttempts++;
+        }, 50);
 
         // 3. ACTION BAR (Sticky)
         if ($('#dsfr-edit-bar').length) $('#dsfr-edit-bar').remove();
