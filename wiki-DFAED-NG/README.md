@@ -77,6 +77,7 @@ Le Wiki de production **n'a pas** accès à ce dépôt Git. Vous devez mettre à
 | `dsfr/Style.css` | `MediaWiki:Dsfr/Style.css` | Styles DSFR & Overrides |
 | `dsfr/components/Badge.js` | `MediaWiki:Dsfr/components/Badge.js` | Composant Badge |
 | `dsfr/components/Accordion.js` | `MediaWiki:Dsfr/components/Accordion.js` | Composant Accordéon |
+| `dsfr/components/Stepper.js` | `MediaWiki:Dsfr/components/Stepper.js` | Composant Indicateur d'étapes |
 
 ---
 

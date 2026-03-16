@@ -19,6 +19,10 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
   - `data-horizontal` étendu : `"tier"` (⅓ image / ⅔ contenu) et `"half"` (50/50) en plus de `"true"` (défaut).
 - **`dsfr/EditPage.js`** : ajout de 5 entrées dans le menu déroulant "Composants DSFR" : Carte (simple), Carte (avec badge et détail), Grille de cartes (2 colonnes), Grille de cartes (3 colonnes), Grille de cartes (4 colonnes).
 - **`Common.js`** : ajout du module `components/Card` dans la liste de chargement.
+- **`dsfr/components/Stepper.js`** : implémentation complète du composant "Indicateur d'étapes" DSFR. Transformation des éléments `.dsfr-stepper` (data-current, data-total, data-title, data-next, data-title-level) en structure `fr-stepper` valide. Support de la dernière étape (sans `fr-stepper__details`).
+- **`dsfr/EditPage.js`** : ajout de 2 entrées dans le menu "Composants DSFR" : Indicateur d'étapes (étape courante), Indicateur d'étapes (dernière étape).
+- **`Common.js`** : ajout du module `components/Stepper` dans la liste de chargement.
+- **`docs/composants/Stepper.md`** : documentation du composant (à la racine du dépôt).
 
 ### Corrections
 

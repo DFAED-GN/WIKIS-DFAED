@@ -34,7 +34,8 @@
             'components/Accordion',
             'components/Alert',
             'components/Badge',
-            'components/Card'
+            'components/Card',
+            'components/Stepper'
         ];
 
         console.log('[DSFR] Loading modules from:', apiPath);

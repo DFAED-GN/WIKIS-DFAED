@@ -74,7 +74,11 @@ var fn = function() {};
 | `staging_area/dsfr/Footer.js` | `MediaWiki:Dsfr/Footer.js` |
 | `staging_area/dsfr/EditPage.js` | `MediaWiki:Dsfr/EditPage.js` |
 | `staging_area/dsfr/Style.css` | `MediaWiki:Dsfr/Style.css` |
-| `staging_area/dsfr/components/*.js` | `MediaWiki:Dsfr/components/*.js` |
+| `staging_area/dsfr/components/Accordion.js` | `MediaWiki:Dsfr/components/Accordion.js` |
+| `staging_area/dsfr/components/Alert.js` | `MediaWiki:Dsfr/components/Alert.js` |
+| `staging_area/dsfr/components/Badge.js` | `MediaWiki:Dsfr/components/Badge.js` |
+| `staging_area/dsfr/components/Card.js` | `MediaWiki:Dsfr/components/Card.js` |
+| `staging_area/dsfr/components/Stepper.js` | `MediaWiki:Dsfr/components/Stepper.js` |
 
 ### Navigation (Config.js)
 

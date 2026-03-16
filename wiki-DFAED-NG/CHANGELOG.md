@@ -9,6 +9,14 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ### Ajouts
 
+- **`dsfr/components/Stepper.js`** : Composant indicateur d'étapes DSFR.
+  - Syntaxe wikitext simplifiée via `.dsfr-stepper` et attributs `data-*` : `data-current`, `data-total`, `data-title`, `data-next` (optionnel), `data-title-level` (optionnel, défaut `h2`).
+  - Génère la structure DSFR complète : `fr-stepper`, `fr-stepper__title`, `fr-stepper__state`, `fr-stepper__steps` (avec `data-fr-current-step` / `data-fr-steps`), `fr-stepper__details` (absent sur la dernière étape).
+  - Clamp automatique des valeurs hors-borne, transformation idempotente.
+- **`dsfr/EditPage.js`** : ajout de 2 entrées dans le menu "Composants DSFR" : Indicateur d'étapes (étape courante) et Indicateur d'étapes (dernière étape).
+- **`Common.js`** : ajout du module `components/Stepper` dans la liste de chargement.
+- **`../../docs/composants/Stepper.md`** : documentation complète du composant (syntaxe, tableau des attributs, exemples HTML, comportement, déploiement).
+
 - **`dsfr/components/Card.js`** : Composant carte DSFR complet.
   - Carte simple via `.dsfr-card` : titre, description, lien (interne via `mw.util.getUrl()` ou URL absolue), badge (types `new`, `info`, `success`, `warning`, `error`), détail avec icône optionnelle, image d'illustration.
   - Grille responsive via `.dsfr-card-grid` : 2, 3 (défaut) ou 4 colonnes, adaptatif mobile → tablette → bureau (`fr-grid-row--equal-height`).

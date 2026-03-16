@@ -78,7 +78,9 @@ Le Wiki de production n'a pas accès à ce dépôt Git. Mise à jour via l'inter
 
 49 composants présents dans `staging_area/dsfr/components/` — tous structurés, à implémenter selon les besoins :
 
-Accordion, Alert, Badge, Breadcrumb, Button, Callout, Card, Checkbox, Combobox, Composition, Connect, Consent, Content, Display, Download, Dropdown, Follow, Form, Highlight, Input, Link, Logo, Modal, Navigation, Notice, Pagination, Password, Quote, Radio, Range, Search, Segmented, Select, Share, Sidemenu, Skiplink, Stepper, Summary, Tab, Tabnav, Table, Tag, Tile, Toggle, Tooltip, Transcription, Translate, Upload, User
+**Actifs** : Accordion, Alert, Badge, Card, Stepper
+
+**Stubs** : Breadcrumb, Button, Callout, Checkbox, Combobox, Composition, Connect, Consent, Content, Display, Download, Dropdown, Follow, Form, Highlight, Input, Link, Logo, Modal, Navigation, Notice, Pagination, Password, Quote, Radio, Range, Search, Segmented, Select, Share, Sidemenu, Skiplink, Summary, Tab, Tabnav, Table, Tag, Tile, Toggle, Tooltip, Transcription, Translate, Upload, User
 
 ---
 

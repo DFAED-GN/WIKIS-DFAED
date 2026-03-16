@@ -117,6 +117,7 @@ Le wiki DFAED-NG est en cours de transformation DSFR. L'environnement de dévelo
 | `staging_area/dsfr/components/Accordion.js` | `MediaWiki:Dsfr/components/Accordion.js` |
 | `staging_area/dsfr/components/Alert.js` | `MediaWiki:Dsfr/components/Alert.js` |
 | `staging_area/dsfr/components/Badge.js` | `MediaWiki:Dsfr/components/Badge.js` |
+| `staging_area/dsfr/components/Stepper.js` | `MediaWiki:Dsfr/components/Stepper.js` |
 
 ---
 
