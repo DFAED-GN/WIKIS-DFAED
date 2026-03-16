@@ -14,6 +14,9 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
   - Grille responsive via `.dsfr-card-grid` : 2, 3 (défaut) ou 4 colonnes, adaptatif mobile → tablette → bureau (`fr-grid-row--equal-height`).
   - Variantes : `data-horizontal`, `data-shadow`, `data-grey`, `data-no-arrow`.
   - Déballage automatique du `<p>` injecté par le parseur MediaWiki autour du contenu des `<div>`.
+  - `data-image` : support des fichiers wiki (`File:Image.png` / `Fichier:Image.png`) en plus des URL directes, via `Special:FilePath`.
+  - `data-image-ratio` : contrôle du ratio de l'image (`16x9`, `32x9`, `3x4`, `2x3`, `4x3`, `1x1`) via les classes DSFR `fr-ratio-*`.
+  - `data-horizontal` étendu : `"tier"` (⅓ image / ⅔ contenu) et `"half"` (50/50) en plus de `"true"` (défaut).
 - **`dsfr/EditPage.js`** : ajout de 5 entrées dans le menu déroulant "Composants DSFR" : Carte (simple), Carte (avec badge et détail), Grille de cartes (2 colonnes), Grille de cartes (3 colonnes), Grille de cartes (4 colonnes).
 - **`Common.js`** : ajout du module `components/Card` dans la liste de chargement.
 

@@ -54,9 +54,10 @@ Le contenu du `<div>` devient la description. Si MediaWiki l'enrobe dans un `<p>
 | `data-detail-icon` | Non | classe DSFR | Icône associée au détail, ex : `fr-icon-map-pin-2-line` |
 | `data-badge` | Non | texte libre | Texte du badge affiché dans la zone `fr-card__start` |
 | `data-badge-type` | Non | `new` · `info` · `success` · `warning` · `error` | Couleur sémantique du badge (défaut : `new`) |
-| `data-image` | Non | URL | URL de l'image d'illustration |
+| `data-image` | Non | URL, `File:…`, `Fichier:…` | URL directe, chemin absolu, ou fichier wiki (`File:Image.png` / `Fichier:Image.png`) — résolu automatiquement via `Special:FilePath` |
 | `data-image-alt` | Non | texte libre | Texte alternatif de l'image (défaut : vide) |
-| `data-horizontal` | Non | `"true"` | Disposition horizontale (image à droite du texte) |
+| `data-image-ratio` | Non | `32x9` · `16x9` · `3x4` · `2x3` · `4x3` · `1x1` | Ratio de l'image via les classes DSFR `fr-ratio-*` (défaut : aucun) |
+| `data-horizontal` | Non | `"true"` · `"tier"` · `"half"` | `"true"` : horizontal par défaut · `"tier"` : ⅓ image / ⅔ contenu · `"half"` : 50/50 |
 | `data-shadow` | Non | `"true"` | Ajoute une ombre portée (`fr-card--shadow`) |
 | `data-grey` | Non | `"true"` | Fond gris (`fr-card--grey`) |
 | `data-no-arrow` | Non | `"true"` | Masque la flèche de navigation (`fr-card--no-arrow`) |
@@ -85,7 +86,7 @@ Le contenu du `<div>` devient la description. Si MediaWiki l'enrobe dans un `<p>
 </div>
 ```
 
-### Carte avec image et ombre
+### Carte avec image (URL directe) et ombre
 
 ```html
 <div class="dsfr-card"
@@ -95,6 +96,41 @@ Le contenu du `<div>` devient la description. Si MediaWiki l'enrobe dans un `<p>
   data-image-alt="Couverture du guide FAED"
   data-shadow="true">
   Guide d'utilisation de l'application FAED à destination des enquêteurs.
+</div>
+```
+
+### Carte avec image issue du wiki et ratio
+
+```html
+<div class="dsfr-card"
+  data-title="Procédure dactyloscopique"
+  data-url="Procedure_dactyloscopique"
+  data-image="File:Procedure-dactyloscopique.jpg"
+  data-image-alt="Illustration de la procédure"
+  data-image-ratio="16x9">
+  Description de la procédure.
+</div>
+```
+
+### Carte horizontale (variantes)
+
+```html
+<!-- Tier : ⅓ image / ⅔ contenu -->
+<div class="dsfr-card"
+  data-title="Document interne"
+  data-url="Document_interne"
+  data-image="Fichier:Document-interne.png"
+  data-horizontal="tier">
+  Document à usage interne du département DFAED.
+</div>
+
+<!-- Half : 50/50 -->
+<div class="dsfr-card"
+  data-title="Rapport annuel"
+  data-url="Rapport_annuel"
+  data-image="File:Rapport-annuel.png"
+  data-horizontal="half">
+  Rapport annuel d'activité du département.
 </div>
 ```
 
@@ -158,7 +194,8 @@ Le contenu du `<div>` devient la description. Si MediaWiki l'enrobe dans un `<p>
   </div>
   <!-- si image -->
   <div class="fr-card__header">
-    <div class="fr-card__img">
+    <!-- fr-ratio-16x9 uniquement si data-image-ratio="16x9" -->
+    <div class="fr-card__img fr-ratio-16x9">
       <img class="fr-responsive-img" src="..." alt="">
     </div>
   </div>
@@ -193,5 +230,6 @@ Le contenu du `<div>` devient la description. Si MediaWiki l'enrobe dans un `<p>
 - **ES5 strict** : le fichier n'utilise que `var`, `function(){}` et la concaténation de chaînes — compatible avec le minifier MediaWiki 1.31.
 - **Déballage automatique** : si MediaWiki enrobe le contenu du `<div>` dans un `<p>`, `<pre>` ou `<div>`, le composant en extrait l'HTML intérieur pour éviter un double enrobage dans `fr-card__desc`.
 - **Résolution d'URL** : les noms de page wiki sont résolus via `mw.util.getUrl()`, jamais en dur. Les URL absolues et les chemins commençant par `/` sont passés tels quels.
+- **Résolution d'image** : `data-image` accepte une URL directe, un chemin absolu, ou un nom de fichier wiki (`File:Image.png` / `Fichier:Image.png`). Dans ce dernier cas, l'URL est construite via `Special:FilePath/NomFichier` qui redirige vers l'URL réelle du fichier hébergé sur le wiki.
 - **Idempotence** : un élément déjà transformé (possède `fr-card` ou `fr-grid-row`) est ignoré lors d'un second appel à `init()`.
 - **Ordre de transformation** : les grilles (`.dsfr-card-grid`) sont traitées avant les cartes autonomes (`.dsfr-card`) pour éviter tout conflit si les deux classes coexistent sur un même élément.
