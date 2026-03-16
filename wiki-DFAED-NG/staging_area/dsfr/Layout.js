@@ -38,32 +38,33 @@ $(function() {
 
     // Only show breadcrumb in view mode (not edit/submit)
     if (action === 'view' && pageName) {
-        // Parse page name into segments
-        // e.g. "Signalisation:Procédure" → ["Signalisation", "Procédure"]
-        // e.g. "NeoDK:Fiches_pratiques/Detail" → ["NeoDK", "Fiches_pratiques", "Detail"]
-        var raw = pageName.replace(/_/g, ' ');
-        var segments = [];
-        var parts = raw.split(':');
-        
-        // Namespace part
-        if (parts.length > 1) {
-            segments.push(parts[0]);
-            var rest = parts.slice(1).join(':');
-            // Subpage parts (split by /)
-            var subParts = rest.split('/');
-            for (var i = 0; i < subParts.length; i++) {
-                segments.push(subParts[i]);
+        // Parse page name into segments using ':' and '/' as hierarchy separators
+        // e.g. "Documentation:ASQ:1-00_Sommaire" → ["Documentation", "ASQ", "1-00 Sommaire"]
+        // e.g. "NeoDK:Fiches_pratiques/Detail"   → ["NeoDK", "Fiches pratiques", "Detail"]
+        var rawSegs = []; // raw parts (with underscores, for link reconstruction)
+        var seps = [];    // separators between parts (':' or '/')
+
+        var colonParts = pageName.split(':');
+        for (var ci = 0; ci < colonParts.length; ci++) {
+            var slashParts = colonParts[ci].split('/');
+            for (var si = 0; si < slashParts.length; si++) {
+                rawSegs.push(slashParts[si]);
+                if (si < slashParts.length - 1) {
+                    seps.push('/');
+                }
             }
-        } else {
-            // No namespace, just subpages
-            var subParts = parts[0].split('/');
-            for (var i = 0; i < subParts.length; i++) {
-                segments.push(subParts[i]);
+            if (ci < colonParts.length - 1) {
+                seps.push(':');
             }
         }
 
+        var labels = [];
+        for (var idx = 0; idx < rawSegs.length; idx++) {
+            labels.push(rawSegs[idx].replace(/_/g, ' '));
+        }
+
         // Don't show breadcrumb on the homepage
-        if (pageName !== 'Accueil' && segments.length > 0) {
+        if (pageName !== 'Accueil' && rawSegs.length > 0) {
             var breadcrumbId = 'breadcrumb-' + Date.now();
             var breadcrumbHtml = '' +
                 '<nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">' +
@@ -73,21 +74,18 @@ $(function() {
                 '      <li><a class="fr-breadcrumb__link" href="' + mw.util.getUrl('Accueil') + '">Accueil</a></li>';
 
             // Build intermediate links (all segments except the last one)
-            var cumulativePath = '';
-            for (var s = 0; s < segments.length - 1; s++) {
-                // Build link target: reconstruct the wiki page name
-                if (s === 0 && parts.length > 1) {
-                    // First segment is namespace
-                    cumulativePath = segments[s] + ':';
-                } else {
-                    cumulativePath += (cumulativePath.slice(-1) === ':' ? '' : '/') + segments[s].replace(/ /g, '_');
+            for (var s = 0; s < rawSegs.length - 1; s++) {
+                // Reconstruct the wiki page name up to segment s
+                var linkTarget = rawSegs[0];
+                for (var k = 1; k <= s; k++) {
+                    linkTarget += seps[k - 1] + rawSegs[k];
                 }
-                breadcrumbHtml += '<li><a class="fr-breadcrumb__link" href="' + mw.util.getUrl(cumulativePath) + '">' + segments[s] + '</a></li>';
+                breadcrumbHtml += '<li><a class="fr-breadcrumb__link" href="' + mw.util.getUrl(linkTarget) + '">' + labels[s] + '</a></li>';
             }
 
             // Last segment = current page (no link)
-            var lastSegment = segments[segments.length - 1];
-            breadcrumbHtml += '<li><a class="fr-breadcrumb__link" aria-current="page">' + lastSegment + '</a></li>';
+            var lastLabel = labels[labels.length - 1];
+            breadcrumbHtml += '<li><a class="fr-breadcrumb__link" aria-current="page">' + lastLabel + '</a></li>';
 
             breadcrumbHtml += '' +
                 '    </ol>' +
@@ -99,7 +97,7 @@ $(function() {
             if ($h1.length) {
                 $h1.before(breadcrumbHtml);
                 // Replace H1 content with just the last segment (clean title)
-                $h1.text(lastSegment);
+                $h1.text(lastLabel);
             }
         }
     }
