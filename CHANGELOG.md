@@ -7,14 +7,20 @@ Les journaux détaillés se trouvent dans chaque sous-projet.
 
 ## Projets
 
-| Wiki | Version actuelle | Journal détaillé |
-|------|-----------------|------------------|
-| DFAED-NG | **2.1.0** | [wiki-DFAED-NG/CHANGELOG.md](wiki-DFAED-NG/CHANGELOG.md) |
-| DocDFAED | **1.0.0** | [wiki-DocDFAED/CHANGELOG.md](wiki-DocDFAED/CHANGELOG.md) |
+| Wiki | Version actuelle | Prochaine version | Journal détaillé |
+|------|-----------------|-------------------|------------------|
+| DFAED-NG | **2.1.0** | 2.2.0 (non publié) | [wiki-DFAED-NG/CHANGELOG.md](wiki-DFAED-NG/CHANGELOG.md) |
+| DocDFAED | **1.0.0** | 1.1.0 (non publié) | [wiki-DocDFAED/CHANGELOG.md](wiki-DocDFAED/CHANGELOG.md) |
 
 ---
 
 ## Résumé des versions — wiki-DFAED-NG
+
+### [Non publié] — 2.2.0
+
+- Composant **Card** opérationnel (carte simple + grille 2/3/4 colonnes, badge, détail, image, variantes).
+- Menu "Composants DSFR" de l'éditeur enrichi de 5 entrées Carte.
+- Fix CSS : reset `list-style` pour tous les éléments DSFR (`ul[class*="fr-"]`).
 
 ### [2.1.0] — 2026-02-26
 - Composants DSFR : **Accordion**, **Alert**, **Badge** (opérationnels).
@@ -35,6 +41,12 @@ Les journaux détaillés se trouvent dans chaque sous-projet.
 ---
 
 ## Résumé des versions — wiki-DocDFAED
+
+### [Non publié] — 1.1.0
+
+- Composant **Card** opérationnel (carte simple + grille 2/3/4 colonnes, badge, détail, image, variantes).
+- Menu "Composants DSFR" de l'éditeur enrichi de 5 entrées Carte.
+- Fix CSS : reset `list-style` pour tous les éléments DSFR (`ul[class*="fr-"]`).
 
 ### [1.0.0] — 2026-03-16
 - Initialisation de l'environnement Docker (port 8081, stack identique à DFAED-NG v2.1.0).

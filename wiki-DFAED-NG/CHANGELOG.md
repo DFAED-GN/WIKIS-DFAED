@@ -7,7 +7,20 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
-*(Aucun changement en attente de la prochaine version.)*
+### Ajouts
+
+- **`dsfr/components/Card.js`** : Composant carte DSFR complet.
+  - Carte simple via `.dsfr-card` : titre, description, lien (interne via `mw.util.getUrl()` ou URL absolue), badge (types `new`, `info`, `success`, `warning`, `error`), détail avec icône optionnelle, image d'illustration.
+  - Grille responsive via `.dsfr-card-grid` : 2, 3 (défaut) ou 4 colonnes, adaptatif mobile → tablette → bureau (`fr-grid-row--equal-height`).
+  - Variantes : `data-horizontal`, `data-shadow`, `data-grey`, `data-no-arrow`.
+  - Déballage automatique du `<p>` injecté par le parseur MediaWiki autour du contenu des `<div>`.
+- **`dsfr/EditPage.js`** : ajout de 5 entrées dans le menu déroulant "Composants DSFR" : Carte (simple), Carte (avec badge et détail), Grille de cartes (2 colonnes), Grille de cartes (3 colonnes), Grille de cartes (4 colonnes).
+- **`Common.js`** : ajout du module `components/Card` dans la liste de chargement.
+- **`docs/composants/Card.md`** : documentation complète du composant (syntaxe wikitext, tableau des attributs, exemples, structure HTML générée, breakpoints responsives).
+
+### Corrections
+
+- **`dsfr/Style.css`** : fix pastilles bleues sur les listes DSFR. MediaWiki applique `list-style: disc` sur tous les `<ul>`, polluant les composants `.fr-nav__list`, `.fr-grid-row`, `.fr-btns-group`, `.fr-menu__list`, etc. Ajout d'un reset `list-style: none !important` ciblant tous les éléments `ul[class*="fr-"]` et `li[class*="fr-"]`.
 
 ---
 
