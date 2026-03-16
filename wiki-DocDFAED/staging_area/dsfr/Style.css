@@ -126,6 +126,18 @@ th {
    3. STRUCTURE
    -------------------------------------------------------- */
 
+/* Reset liste pour tous les composants DSFR
+   MediaWiki applique list-style:disc sur tous les <ul>,
+   ce qui pollue les nav, grilles, groupes de boutons, etc.
+   On neutralise sur tout élément portant une classe fr-* */
+ul[class*="fr-"],
+li[class*="fr-"] {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  background-image: none !important; /* annule les bullets custom via background */
+}
+
 /* Body Reset */
 body {
   background-color: white !important; /* Base DSFR */
