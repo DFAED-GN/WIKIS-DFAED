@@ -1,4 +1,4 @@
-/* 
+/*
  * -------------------------------------------------------------------------
  * SOURCE FILE FOR: MediaWiki:Common.css
  * -------------------------------------------------------------------------
@@ -6,13 +6,41 @@
  * Copiez le contenu de ce fichier dans la page [[MediaWiki:Common.css]] de la prod.
  */
 
-/* 
- * [IMPORTANT] ANTI-FOUC (Flash Of Unstyled Content)
- * En PROD, pour que le thème s'affiche immédiatement sans clignotement,
- * décommentez la ligne ci-dessous si vous ne copiez pas le contenu de Style.css ici :
- * (Adaptez le chemin selon votre installation : /dfaedv3/index.php en prod, /index.php en local)
+/*
+ * -------------------------------------------------------------------------
+ * ANTI-FOUC — Masque le contenu pendant les transformations JS
+ * -------------------------------------------------------------------------
+ * .mw-parser-output est masqué immédiatement (chargement synchrone dans <head>
+ * via MW ResourceLoader). Common.js ajoute html.dsfr-ready quand tous les
+ * modules sont initialisés, déclenchant la révélation avec transition.
+ *
+ * Deux failsafes garantissent que le contenu devient toujours visible :
+ *   — CSS  : animation différée à 4s (si JS échoue ou est trop lent)
+ *   — JS   : setTimeout à 5s dans Common.js (si les onload ne se déclenchent pas)
+ * -------------------------------------------------------------------------
  */
-/* @import url("/dfaedv3/index.php?title=MediaWiki:Dsfr/Style.css&action=raw&ctype=text/css"); */
 
-/* Vos styles personnalisés ci-dessous */
+.mw-parser-output {
+    opacity: 0;
+    /* Failsafe CSS : révélation forcée après 4s quoi qu'il arrive */
+    animation: dsfr-fouc-reveal 0s 4s forwards;
+}
 
+@keyframes dsfr-fouc-reveal {
+    to { opacity: 1; }
+}
+
+/* Révélation normale : déclenchée par Common.js via html.dsfr-ready */
+html.dsfr-ready .mw-parser-output {
+    opacity: 1;
+    transition: opacity 0.15s ease;
+    animation: none;
+}
+
+/* Ne pas masquer les pages d'édition (le masque ne s'y applique pas) */
+.action-edit .mw-parser-output,
+.action-submit .mw-parser-output {
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+}

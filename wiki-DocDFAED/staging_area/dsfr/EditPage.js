@@ -291,7 +291,18 @@
             { label: "Grille de cartes (3 colonnes)", open: '<div class="dsfr-card-grid" data-cols="3">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n</div>', close: '', sample: '' },
             { label: "Grille de cartes (4 colonnes)", open: '<div class="dsfr-card-grid" data-cols="4">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n<div class="dsfr-card-item" data-title="Carte 4" data-url="Page_4">Description 4</div>\n</div>', close: '', sample: '' },
             { label: "Indicateur d'étapes (étape courante)", open: '<div class="dsfr-stepper" data-current="1" data-total="3" data-title="Titre de l\'étape en cours" data-next="Titre de l\'étape suivante"></div>', close: '', sample: '' },
-            { label: "Indicateur d'étapes (dernière étape)", open: '<div class="dsfr-stepper" data-current="3" data-total="3" data-title="Confirmation et envoi"></div>', close: '', sample: '' }
+            { label: "Indicateur d'étapes (dernière étape)", open: '<div class="dsfr-stepper" data-current="3" data-total="3" data-title="Confirmation et envoi"></div>', close: '', sample: '' },
+            { label: "Infobulle (bouton icône)", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="button"></span>', close: '', sample: '' },
+            { label: "Infobulle (lien texte)", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="link" data-label="Voir plus"></span>', close: '', sample: '' },
+            { label: "Tableau DSFR (simple)", open: '<div class="dsfr-table" data-caption="Titre du tableau">\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' },
+            { label: "Tableau DSFR (défilant)", open: '<div class="dsfr-table" data-caption="Titre du tableau" data-scrollable>\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' },
+            { label: "Onglets (2 onglets)", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Premier onglet">Contenu du premier onglet</div>\n  <div class="dsfr-tab" data-title="Deuxième onglet">Contenu du deuxième onglet</div>\n</div>', close: '', sample: '' },
+            { label: "Onglets (3 onglets)", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Onglet 1">Contenu 1</div>\n  <div class="dsfr-tab" data-title="Onglet 2">Contenu 2</div>\n  <div class="dsfr-tab" data-title="Onglet 3">Contenu 3</div>\n</div>', close: '', sample: '' },
+            { label: "Téléchargement de fichier", open: '<span class="dsfr-download" data-href="Fichier:Nom-du-fichier.pdf" data-label="Nom du document" data-detail="PDF — Taille"></span>', close: '', sample: '' },
+            { label: "Tag (simple)", open: '<span data-dsfr-tag>', close: '</span>', sample: 'Étiquette' },
+            { label: "Tag (avec icône)", open: '<span data-dsfr-tag data-icon="fr-icon-check-line">', close: '</span>', sample: 'Validé' },
+            { label: "Groupe de tags", open: '<span class="dsfr-tags-group"><span data-dsfr-tag>Tag 1</span> <span data-dsfr-tag>Tag 2</span></span>', close: '', sample: '' },
+            { label: "Sommaire (automatique)", open: '<div class="dsfr-summary"></div>', close: '', sample: '' }
         ];
 
         $.each(components, function(i, c) {
