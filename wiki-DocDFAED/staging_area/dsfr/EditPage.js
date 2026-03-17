@@ -77,7 +77,17 @@
             '.dsfr-color-swatch::before,.dsfr-color-swatch::after{content:none !important;display:none !important;}' +
             '.dsfr-color-swatch:hover{transform:scale(1.2);border-color:#000091;}' +
             '.dsfr-color-swatch--active{border-color:#000091;box-shadow:0 0 0 2px #000091;}' +
-            '.dsfr-color-preview{width:100%;height:4px;border-radius:0 0 2px 2px;position:absolute;bottom:2px;left:0;}';
+            '.dsfr-color-preview{width:100%;height:4px;border-radius:0 0 2px 2px;position:absolute;bottom:2px;left:0;}' +
+            '.dsfr-comp-group-hd{display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;cursor:pointer;background:#f6f6f6;border-bottom:1px solid #eee;font-weight:600;font-size:0.875rem;color:#3a3a3a;}' +
+            '.dsfr-comp-group-hd:hover{background:#ececec;}' +
+            '.dsfr-comp-group-arrow{font-size:0.6rem;transition:transform 0.15s;display:inline-block;margin-left:0.5rem;}' +
+            '.dsfr-comp-group-hd.is-open .dsfr-comp-group-arrow{transform:rotate(90deg);}' +
+            '.dsfr-comp-group-body{display:none;background:#fff;}' +
+            '.dsfr-comp-group-body.is-open{display:block;}' +
+            '.dsfr-comp-sub-link{display:block;padding:0.45rem 1rem 0.45rem 1.75rem;color:#161616;text-decoration:none;border-bottom:1px solid #f0f0f0;font-size:0.8125rem;}' +
+            '.dsfr-comp-sub-link:hover{background:#f0f0ff;color:#000091;}' +
+            '.dsfr-comp-direct-lk{display:block;padding:0.6rem 1rem;color:#161616;text-decoration:none;border-bottom:1px solid #eee;font-size:0.875rem;}' +
+            '.dsfr-comp-direct-lk:hover{background:#f6f6f6;color:#000091;}';
 
         $('head').append('<style>' + customIconsCss + pickerCss + '</style>');
 
@@ -276,46 +286,137 @@
         var $menu = $('<div class="fr-menu" style="display:none; position:absolute; top:100%; left:0; z-index:2000; background:white; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,0.1); min-width:300px;"></div>');
         var $menuList = $('<ul class="fr-menu__list" style="margin:0; padding:0; list-style:none;"></ul>');
 
-        var components = [
-            { label: "Alerte (Info)", open: '<div class="dsfr-alert" data-type="info" data-title="Information">\n', close: "\n</div>", sample: "Contenu de l'alerte" },
-            { label: "Alerte (Succès)", open: '<div class="dsfr-alert" data-type="success" data-title="Succès">\n', close: "\n</div>", sample: "Opération réussie" },
-            { label: "Alerte (Erreur)", open: '<div class="dsfr-alert" data-type="error" data-title="Erreur">\n', close: "\n</div>", sample: "Une erreur est survenue" },
-            { label: "Accordéon", open: '<div class="dsfr-accordion-item">\n  <div class="dsfr-accordion-title">Titre de l\'accordéon</div>\n  <div class="dsfr-accordion-content">\n', close: "\n  </div>\n</div>", sample: "Contenu caché" },
-            { label: "Badge (Succès)", open: '<span data-dsfr-badge="success">', close: '</span>', sample: "Nouveau" },
-            { label: "Badge (Info)", open: '<span data-dsfr-badge="info">', close: '</span>', sample: "Brouillon" },
-            { label: "Mise en avant (Callout)", open: '<div class="fr-callout">\n  <h3 class="fr-callout__title">Titre mise en avant</h3>\n  <p class="fr-callout__text">\n', close: "\n  </p>\n</div>", sample: "Texte important" },
-            { label: "Citation", open: '<div class="fr-quote">\n  <blockquote>\n    <p>« ', close: ' »</p>\n  </blockquote>\n  <figcaption>\n    <p class="fr-quote__author">Auteur</p>\n  </figcaption>\n</div>', sample: "Citation" },
-            { label: "Carte (simple)", open: '<div class="dsfr-card" data-title="Titre de la carte" data-url="Nom_Page_Wiki">\n', close: '\n</div>', sample: 'Description de la carte.' },
-            { label: "Carte (avec badge et détail)", open: '<div class="dsfr-card" data-title="Titre de la carte" data-url="Nom_Page_Wiki" data-badge="Nouveau" data-badge-type="new" data-detail="Catégorie">\n', close: '\n</div>', sample: 'Description de la carte.' },
-            { label: "Grille de cartes (2 colonnes)", open: '<div class="dsfr-card-grid" data-cols="2">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n</div>', close: '', sample: '' },
-            { label: "Grille de cartes (3 colonnes)", open: '<div class="dsfr-card-grid" data-cols="3">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n</div>', close: '', sample: '' },
-            { label: "Grille de cartes (4 colonnes)", open: '<div class="dsfr-card-grid" data-cols="4">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n<div class="dsfr-card-item" data-title="Carte 4" data-url="Page_4">Description 4</div>\n</div>', close: '', sample: '' },
-            { label: "Indicateur d'étapes (étape courante)", open: '<div class="dsfr-stepper" data-current="1" data-total="3" data-title="Titre de l\'étape en cours" data-next="Titre de l\'étape suivante"></div>', close: '', sample: '' },
-            { label: "Indicateur d'étapes (dernière étape)", open: '<div class="dsfr-stepper" data-current="3" data-total="3" data-title="Confirmation et envoi"></div>', close: '', sample: '' },
-            { label: "Infobulle (bouton icône)", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="button"></span>', close: '', sample: '' },
-            { label: "Infobulle (lien texte)", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="link" data-label="Voir plus"></span>', close: '', sample: '' },
-            { label: "Tableau DSFR (simple)", open: '<div class="dsfr-table" data-caption="Titre du tableau">\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' },
-            { label: "Tableau DSFR (défilant)", open: '<div class="dsfr-table" data-caption="Titre du tableau" data-scrollable>\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' },
-            { label: "Onglets (2 onglets)", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Premier onglet">Contenu du premier onglet</div>\n  <div class="dsfr-tab" data-title="Deuxième onglet">Contenu du deuxième onglet</div>\n</div>', close: '', sample: '' },
-            { label: "Onglets (3 onglets)", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Onglet 1">Contenu 1</div>\n  <div class="dsfr-tab" data-title="Onglet 2">Contenu 2</div>\n  <div class="dsfr-tab" data-title="Onglet 3">Contenu 3</div>\n</div>', close: '', sample: '' },
-            { label: "Téléchargement de fichier", open: '<span class="dsfr-download" data-href="Fichier:Nom-du-fichier.pdf" data-label="Nom du document" data-detail="PDF — Taille"></span>', close: '', sample: '' },
-            { label: "Tag (simple)", open: '<span data-dsfr-tag>', close: '</span>', sample: 'Étiquette' },
-            { label: "Tag (avec icône)", open: '<span data-dsfr-tag data-icon="fr-icon-check-line">', close: '</span>', sample: 'Validé' },
-            { label: "Groupe de tags", open: '<span class="dsfr-tags-group"><span data-dsfr-tag>Tag 1</span> <span data-dsfr-tag>Tag 2</span></span>', close: '', sample: '' },
-            { label: "Sommaire (automatique)", open: '<div class="dsfr-summary"></div>', close: '', sample: '' }
+        var componentGroups = [
+            {
+                label: "Accordéon",
+                open: '<div class="dsfr-accordion-item">\n  <div class="dsfr-accordion-title">Titre de l\'accordéon</div>\n  <div class="dsfr-accordion-content">\n',
+                close: "\n  </div>\n</div>",
+                sample: "Contenu caché"
+            },
+            {
+                label: "Alerte",
+                items: [
+                    { label: "Info", open: '<div class="dsfr-alert" data-type="info" data-title="Information">\n', close: "\n</div>", sample: "Contenu de l'alerte" },
+                    { label: "Succès", open: '<div class="dsfr-alert" data-type="success" data-title="Succès">\n', close: "\n</div>", sample: "Opération réussie" },
+                    { label: "Erreur", open: '<div class="dsfr-alert" data-type="error" data-title="Erreur">\n', close: "\n</div>", sample: "Une erreur est survenue" }
+                ]
+            },
+            {
+                label: "Badge",
+                items: [
+                    { label: "Succès", open: '<span data-dsfr-badge="success">', close: '</span>', sample: "Nouveau" },
+                    { label: "Info", open: '<span data-dsfr-badge="info">', close: '</span>', sample: "Brouillon" }
+                ]
+            },
+            {
+                label: "Carte",
+                items: [
+                    { label: "Simple", open: '<div class="dsfr-card" data-title="Titre de la carte" data-url="Nom_Page_Wiki">\n', close: '\n</div>', sample: 'Description de la carte.' },
+                    { label: "Avec badge et détail", open: '<div class="dsfr-card" data-title="Titre de la carte" data-url="Nom_Page_Wiki" data-badge="Nouveau" data-badge-type="new" data-detail="Catégorie">\n', close: '\n</div>', sample: 'Description de la carte.' },
+                    { label: "Grille 2 colonnes", open: '<div class="dsfr-card-grid" data-cols="2">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n</div>', close: '', sample: '' },
+                    { label: "Grille 3 colonnes", open: '<div class="dsfr-card-grid" data-cols="3">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n</div>', close: '', sample: '' },
+                    { label: "Grille 4 colonnes", open: '<div class="dsfr-card-grid" data-cols="4">\n<div class="dsfr-card-item" data-title="Carte 1" data-url="Page_1">Description 1</div>\n<div class="dsfr-card-item" data-title="Carte 2" data-url="Page_2">Description 2</div>\n<div class="dsfr-card-item" data-title="Carte 3" data-url="Page_3">Description 3</div>\n<div class="dsfr-card-item" data-title="Carte 4" data-url="Page_4">Description 4</div>\n</div>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Citation",
+                open: '<div class="fr-quote">\n  <blockquote>\n    <p>« ',
+                close: ' »</p>\n  </blockquote>\n  <figcaption>\n    <p class="fr-quote__author">Auteur</p>\n  </figcaption>\n</div>',
+                sample: "Citation"
+            },
+            {
+                label: "Indicateur d'étapes",
+                items: [
+                    { label: "Étape en cours", open: '<div class="dsfr-stepper" data-current="1" data-total="3" data-title="Titre de l\'étape en cours" data-next="Titre de l\'étape suivante"></div>', close: '', sample: '' },
+                    { label: "Dernière étape", open: '<div class="dsfr-stepper" data-current="3" data-total="3" data-title="Confirmation et envoi"></div>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Infobulle",
+                items: [
+                    { label: "Bouton icône", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="button"></span>', close: '', sample: '' },
+                    { label: "Lien texte", open: '<span class="dsfr-tooltip" data-content="Texte de l\'infobulle" data-trigger="link" data-label="Voir plus"></span>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Mise en avant",
+                open: '<div class="fr-callout">\n  <h3 class="fr-callout__title">Titre mise en avant</h3>\n  <p class="fr-callout__text">\n',
+                close: "\n  </p>\n</div>",
+                sample: "Texte important"
+            },
+            {
+                label: "Onglets",
+                items: [
+                    { label: "2 onglets", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Premier onglet">Contenu du premier onglet</div>\n  <div class="dsfr-tab" data-title="Deuxième onglet">Contenu du deuxième onglet</div>\n</div>', close: '', sample: '' },
+                    { label: "3 onglets", open: '<div class="dsfr-tabs">\n  <div class="dsfr-tab" data-title="Onglet 1">Contenu 1</div>\n  <div class="dsfr-tab" data-title="Onglet 2">Contenu 2</div>\n  <div class="dsfr-tab" data-title="Onglet 3">Contenu 3</div>\n</div>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Sommaire automatique",
+                open: '<div class="dsfr-summary"></div>',
+                close: '',
+                sample: ''
+            },
+            {
+                label: "Tableau",
+                items: [
+                    { label: "Simple", open: '<div class="dsfr-table" data-caption="Titre du tableau">\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' },
+                    { label: "Défilant", open: '<div class="dsfr-table" data-caption="Titre du tableau" data-scrollable>\n{| class="wikitable"\n! Colonne 1 !! Colonne 2 !! Colonne 3\n|-\n| Valeur A || Valeur B || Valeur C\n|}\n</div>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Tag / Étiquette",
+                items: [
+                    { label: "Simple", open: '<span data-dsfr-tag>', close: '</span>', sample: 'Étiquette' },
+                    { label: "Avec icône", open: '<span data-dsfr-tag data-icon="fr-icon-check-line">', close: '</span>', sample: 'Validé' },
+                    { label: "Groupe de tags", open: '<span class="dsfr-tags-group"><span data-dsfr-tag>Tag 1</span> <span data-dsfr-tag>Tag 2</span></span>', close: '', sample: '' }
+                ]
+            },
+            {
+                label: "Téléchargement",
+                open: '<span class="dsfr-download" data-href="Fichier:Nom-du-fichier.pdf" data-label="Nom du document" data-detail="PDF — Taille"></span>',
+                close: '',
+                sample: ''
+            }
         ];
 
-        $.each(components, function(i, c) {
+        $.each(componentGroups, function(idx, group) {
             var $item = $('<li></li>');
-            var $link = $('<a href="#" style="display:block; padding:0.75rem 1rem; color:#161616; text-decoration:none; border-bottom:1px solid #eee;">' + c.label + '</a>');
-            $link.hover(function(){ $(this).css('background', '#f6f6f6'); }, function(){ $(this).css('background', 'white'); });
-            $link.click(function(e) {
-                e.preventDefault();
-                insertTags(c.open, c.close, c.sample);
-                $menu.hide();
-                $compBtn.attr('aria-expanded', 'false');
-            });
-            $item.append($link); $menuList.append($item);
+            if (group.items) {
+                var $hd = $('<div class="dsfr-comp-group-hd">' + group.label + '<span class="dsfr-comp-group-arrow">&#9658;</span></div>');
+                var $body = $('<ul class="dsfr-comp-group-body" style="margin:0;padding:0;list-style:none;"></ul>');
+                $hd.on('click', function() {
+                    $(this).toggleClass('is-open');
+                    $body.toggleClass('is-open');
+                });
+                $.each(group.items, function(jdx, subItem) {
+                    var $subLi = $('<li></li>');
+                    var $subLink = $('<a href="#" class="dsfr-comp-sub-link">' + subItem.label + '</a>');
+                    (function(si) {
+                        $subLink.on('click', function(e) {
+                            e.preventDefault();
+                            insertTags(si.open, si.close, si.sample);
+                            $menu.hide();
+                            $compBtn.attr('aria-expanded', 'false');
+                        });
+                    })(subItem);
+                    $subLi.append($subLink);
+                    $body.append($subLi);
+                });
+                $item.append($hd).append($body);
+            } else {
+                var $link = $('<a href="#" class="dsfr-comp-direct-lk">' + group.label + '</a>');
+                (function(g) {
+                    $link.on('click', function(e) {
+                        e.preventDefault();
+                        insertTags(g.open, g.close, g.sample);
+                        $menu.hide();
+                        $compBtn.attr('aria-expanded', 'false');
+                    });
+                })(group);
+                $item.append($link);
+            }
+            $menuList.append($item);
         });
         
         var $docItem = $('<li><a href="https://www.systeme-de-design.gouv.fr/version-courante/fr/composants" target="_blank" style="display:block; padding:0.75rem 1rem; color:#000091; font-weight:bold; text-decoration:none; background:#f5f5fe;">Voir la documentation officielle ↗</a></li>');
