@@ -130,7 +130,7 @@
 
         if ($('#dsfr-editor-toolbar').length) $('#dsfr-editor-toolbar').remove();
         
-        var $dsfrToolbar = $('<div id="dsfr-editor-toolbar" style="display:flex;flex-direction:column;align-items:center;width:2.5rem;background:#f6f6f6;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;padding:0.25rem 0;flex-shrink:0;overflow-y:auto;overflow-x:visible;position:relative;z-index:10;"></div>');
+        var $dsfrToolbar = $('<div id="dsfr-editor-toolbar" style="display:flex;flex-direction:column;align-items:center;width:2.5rem;background:#f6f6f6;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;padding:0.25rem 0;flex-shrink:0;"></div>');
         
         // --- Standard Tools ---
         // --- Palette colors for pickers ---
@@ -285,10 +285,10 @@
         });
 
         // --- BUTTTON "Ajouter un composant DSFR" ---
-        var $compLi = $('<li style="position:relative;"></li>');
+        var $compLi = $('<li></li>');
         var $compBtn = $('<button type="button" class="fr-btn fr-btn--tertiary-no-outline fr-icon-layout-grid-line" aria-expanded="false" title="Composants DSFR"></button>');
 
-        var $menu = $('<div class="fr-menu" style="display:none; position:absolute; top:0; left:100%; z-index:2000; background:white; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.1); min-width:280px; max-height:80vh; overflow-y:auto;"></div>');
+        var $menu = $('<div class="fr-menu" style="display:none; position:fixed; z-index:9999; background:white; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:280px; max-height:80vh; overflow-y:auto;"></div>');
         var $menuList = $('<ul class="fr-menu__list" style="margin:0; padding:0; list-style:none;"></ul>');
 
         var componentGroups = [
@@ -427,12 +427,20 @@
         
         var $docItem = $('<li><a href="https://www.systeme-de-design.gouv.fr/version-courante/fr/composants" target="_blank" style="display:block; padding:0.75rem 1rem; color:#000091; font-weight:bold; text-decoration:none; background:#f5f5fe;">Voir la documentation officielle ↗</a></li>');
         $menuList.append($docItem);
-        $menu.append($menuList); $compLi.append($compBtn).append($menu);
+        $menu.append($menuList);
+        $compLi.append($compBtn);
+        $(document.body).append($menu);
 
         $compBtn.click(function(e) {
             e.stopPropagation();
-            if ($menu.is(':visible')) { $menu.hide(); $(this).attr('aria-expanded', 'false'); }
-            else { $('.fr-menu').hide(); $menu.show(); $(this).attr('aria-expanded', 'true'); }
+            if ($menu.is(':visible')) {
+                $menu.hide();
+                $(this).attr('aria-expanded', 'false');
+            } else {
+                var rect = document.getElementById('dsfr-editor-toolbar').getBoundingClientRect();
+                $menu.css({ top: rect.top, left: rect.right + 4 }).show();
+                $(this).attr('aria-expanded', 'true');
+            }
         });
         $(document).click(function() {
             $menu.hide(); $compBtn.attr('aria-expanded', 'false');
