@@ -18,9 +18,12 @@ Les journaux détaillés se trouvent dans chaque sous-projet.
 
 ### [Non publié] — 2.2.0
 
+- **Architecture `shared/`** : base de code commune aux deux wikis. `staging_area/` réduit à `Config.js` + `Common.js`.
+- Composant **Stepper** opérationnel (indicateur d'étapes avec syntaxe `data-*`).
 - Composant **Card** opérationnel (carte simple + grille 2/3/4 colonnes, badge, détail, image, variantes).
-- Menu "Composants DSFR" de l'éditeur enrichi de 5 entrées Carte.
-- Fix CSS : reset `list-style` pour tous les éléments DSFR (`ul[class*="fr-"]`).
+- **36 composants implémentés** dans `shared/dsfr/components/` — 5 actifs, 31 disponibles à l'activation.
+- **36 docs Markdown** dans `docs/composants/` — un par composant.
+- Fix : race condition `Header.js`, artefacts MW dans `Layout.js`, reset `list-style` DSFR.
 
 ### [2.1.0] — 2026-02-26
 
@@ -47,9 +50,13 @@ Les journaux détaillés se trouvent dans chaque sous-projet.
 
 ### [Non publié] — 1.1.0
 
-- Composant **Card** opérationnel (carte simple + grille 2/3/4 colonnes, badge, détail, image, variantes).
-- Menu "Composants DSFR" de l'éditeur enrichi de 5 entrées Carte.
-- Fix CSS : reset `list-style` pour tous les éléments DSFR (`ul[class*="fr-"]`).
+- **Architecture `shared/`** : base de code commune aux deux wikis.
+- Composants **Card** et **Stepper** opérationnels.
+- **6 composants supplémentaires actifs** : Download, Summary, Tab, Table, Tag, Tooltip.
+- **36 composants implémentés** dans `shared/dsfr/components/` — 11 actifs, 25 disponibles.
+- **36 docs Markdown** dans `docs/composants/` — un par composant.
+- `Common.css` enrichi de styles custom (tableaux, infoboxes, formulaires).
+- Fix : race condition `Header.js`, artefacts MW, barre d'outils `EditPage.js` (3 corrections).
 
 ### [1.0.0] — 2026-03-16
 

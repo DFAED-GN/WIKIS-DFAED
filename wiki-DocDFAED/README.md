@@ -37,7 +37,7 @@ DocDFAED est la plateforme de documentation interne du Département du Fichier A
 
 ## Workflow de développement
 
-Toute l'édition se fait dans le dossier local `/staging_area`.
+L'édition se fait dans `staging_area/` (Config.js + Common.js propres à DocDFAED) et dans `../shared/` (base commune aux deux wikis).
 
 > **CONTRAINTE TECHNIQUE — Compatibilité prod (MediaWiki 1.31)**
 > Le Wiki de production ne supporte pas le JavaScript moderne dans son minifier.
@@ -50,17 +50,17 @@ Toute l'édition se fait dans le dossier local `/staging_area`.
 
 Le Wiki de production n'a pas accès à ce dépôt Git. Mise à jour via l'interface web uniquement.
 
-| Fichier local | Page Wiki de production | Rôle |
+| Source locale | Page Wiki de production | Rôle |
 | -------------- | ------------------------- | ------ |
-| `Common.css` | `MediaWiki:Common.css` | Styles de base |
-| `Common.js` | `MediaWiki:Common.js` | Loader & chef d'orchestre |
-| `dsfr/Config.js` | `MediaWiki:Dsfr/Config.js` | Branding, navigation, footer DocDFAED |
-| `dsfr/Layout.js` | `MediaWiki:Dsfr/Layout.js` | Nettoyage DOM & CSS fallback |
-| `dsfr/Header.js` | `MediaWiki:Dsfr/Header.js` | Header DSFR |
-| `dsfr/Footer.js` | `MediaWiki:Dsfr/Footer.js` | Pied de page |
-| `dsfr/EditPage.js` | `MediaWiki:Dsfr/EditPage.js` | Barre d'édition DSFR custom |
-| `dsfr/Style.css` | `MediaWiki:Dsfr/Style.css` | Styles DSFR & overrides |
-| `dsfr/components/*.js` | `MediaWiki:Dsfr/components/*.js` | Composants DSFR (voir liste ci-dessous) |
+| `staging_area/Common.js` | `MediaWiki:Common.js` | Loader & chef d'orchestre (À copier en priorité) |
+| `staging_area/dsfr/Config.js` | `MediaWiki:Dsfr/Config.js` | Navigation, branding, footer DocDFAED |
+| `shared/Common.css` | `MediaWiki:Common.css` | Styles de base |
+| `shared/dsfr/Layout.js` | `MediaWiki:Dsfr/Layout.js` | Nettoyage DOM & fil d'Ariane |
+| `shared/dsfr/Header.js` | `MediaWiki:Dsfr/Header.js` | Header DSFR |
+| `shared/dsfr/Footer.js` | `MediaWiki:Dsfr/Footer.js` | Pied de page |
+| `shared/dsfr/EditPage.js` | `MediaWiki:Dsfr/EditPage.js` | Barre d'édition DSFR |
+| `shared/dsfr/Style.css` | `MediaWiki:Dsfr/Style.css` | Styles DSFR & overrides |
+| `shared/dsfr/components/*.js` | `MediaWiki:Dsfr/components/*.js` | Composants DSFR (voir liste ci-dessous) |
 
 ### Navigation configurée (Config.js)
 
@@ -78,9 +78,9 @@ Le Wiki de production n'a pas accès à ce dépôt Git. Mise à jour via l'inter
 
 49 composants présents dans `staging_area/dsfr/components/` — tous structurés, à implémenter selon les besoins :
 
-**Actifs** : Accordion, Alert, Badge, Card, Stepper
+**Actifs** : Accordion, Alert, Badge, Card, Stepper, Download, Summary, Tab, Table, Tag, Tooltip (11 composants chargés dans `sharedModules`)
 
-**Stubs** : Breadcrumb, Button, Callout, Checkbox, Combobox, Composition, Connect, Consent, Content, Display, Download, Dropdown, Follow, Form, Highlight, Input, Link, Logo, Modal, Navigation, Notice, Pagination, Password, Quote, Radio, Range, Search, Segmented, Select, Share, Sidemenu, Skiplink, Summary, Tab, Tabnav, Table, Tag, Tile, Toggle, Tooltip, Transcription, Translate, Upload, User
+**Disponibles dans `shared/`, non encore activés** : Breadcrumb, Button, Callout, Checkbox, Dropdown, Form, Highlight, Input, Link, Modal, Notice, Pagination, Quote, Radio, Search, Segmented, Select, Share, Sidemenu, Skiplink, Tabnav, Tile, Toggle, Transcription, Upload
 
 ---
 
