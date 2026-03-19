@@ -5,7 +5,7 @@
   var maxAttempts = 300; // 300 * 50ms = 15 seconds
 
   function tryMountHeader() {
-    if (!window.jQuery || !window.mw || !window.mw.util) {
+    if (!window.jQuery || !window.mw || !window.mw.util || !window.DsfrConfig) {
       attempts++;
       if (attempts < maxAttempts) {
         setTimeout(tryMountHeader, 50);
