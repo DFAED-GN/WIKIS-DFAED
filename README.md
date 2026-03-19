@@ -50,7 +50,7 @@ Cette transformation se fait **sans modifier le cœur de MediaWiki** : elle repo
 
 ## Structure du dépôt
 
-```
+```bash
 WIKIS-DFAED/
 ├── README.md               ← ce fichier
 ├── CLAUDE.md               ← instructions pour Claude Code

@@ -7,7 +7,7 @@ DocDFAED est la plateforme de documentation interne du Département du Fichier A
 ## Stack
 
 | Composant | Version |
-|-----------|---------|
+| ----------- | --------- |
 | MediaWiki | 1.31.16 (LTS) |
 | Semantic MediaWiki | 3.2.3 |
 | PHP | 7.4 |
@@ -41,9 +41,9 @@ Toute l'édition se fait dans le dossier local `/staging_area`.
 
 > **CONTRAINTE TECHNIQUE — Compatibilité prod (MediaWiki 1.31)**
 > Le Wiki de production ne supporte pas le JavaScript moderne dans son minifier.
+>
 > - **INTERDIT** : `const`, `let`, les backticks `` ` ``, les fonctions fléchées `=>`.
 > - **OBLIGATOIRE** : `var`, la concaténation `'a' + 'b'`, et `function() {}` classique.
-
 > **RÈGLE IMPORTANTE** : Chaque fichier doit commencer par `/* SOURCE FILE FOR: [[MediaWiki:NomDeLaPage]] */`
 
 ### Déploiement en Production (Copy-Paste)
@@ -51,7 +51,7 @@ Toute l'édition se fait dans le dossier local `/staging_area`.
 Le Wiki de production n'a pas accès à ce dépôt Git. Mise à jour via l'interface web uniquement.
 
 | Fichier local | Page Wiki de production | Rôle |
-|--------------|-------------------------|------|
+| -------------- | ------------------------- | ------ |
 | `Common.css` | `MediaWiki:Common.css` | Styles de base |
 | `Common.js` | `MediaWiki:Common.js` | Loader & chef d'orchestre |
 | `dsfr/Config.js` | `MediaWiki:Dsfr/Config.js` | Branding, navigation, footer DocDFAED |
@@ -65,7 +65,7 @@ Le Wiki de production n'a pas accès à ce dépôt Git. Mise à jour via l'inter
 ### Navigation configurée (Config.js)
 
 | Entrée | Type | Sous-éléments |
-|--------|------|---------------|
+| -------- | ------ | --------------- |
 | Accueil | Lien | — |
 | Documentation | Menu | ASQ, Veille professionnelle |
 | Formation | Menu | Formations internes, Formations externes |
