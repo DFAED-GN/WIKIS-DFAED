@@ -8,41 +8,82 @@
  
 /*
  * -------------------------------------------------------------------------
- * ANTI-FOUC — Masque le contenu pendant les transformations JS
+ * ANTI-FOUC — Masque TOUTE l'interface Vector pendant le chargement DSFR
  * -------------------------------------------------------------------------
- * .mw-parser-output est masqué immédiatement (chargement synchrone dans <head>
- * via MW ResourceLoader). Common.js ajoute html.dsfr-ready quand tous les
- * modules sont initialisés, déclenchant la révélation avec transition.
+ * body est rendu invisible immediatement (ce CSS est charge dans <head>).
+ * Un overlay + spinner DSFR s'affiche via html::before / html::after.
+ * Common.js ajoute html.dsfr-ready quand tous les modules sont initialises,
+ * declenchant la revelation avec transition.
  *
  * Deux failsafes garantissent que le contenu devient toujours visible :
- *   — CSS  : animation différée à 4s (si JS échoue ou est trop lent)
- *   — JS   : setTimeout à 5s dans Common.js (si les onload ne se déclenchent pas)
+ *   — CSS  : animation differee a 4s (si JS echoue ou est trop lent)
+ *   — JS   : setTimeout a 5s dans Common.js (si les onload ne se declenchent pas)
  * -------------------------------------------------------------------------
  */
 
-.mw-parser-output {
+/* --- Masquer le body entier --- */
+body {
     opacity: 0;
-    /* Failsafe CSS : révélation forcée après 4s quoi qu'il arrive */
-    animation: dsfr-fouc-reveal 0s 4s forwards;
+    transition: opacity 0.3s ease-in;
+    animation: dsfr-failsafe-body 0s ease-in 4s forwards;
 }
 
-@keyframes dsfr-fouc-reveal {
-    to { opacity: 1; }
-}
-
-/* Révélation normale : déclenchée par Common.js via html.dsfr-ready */
-html.dsfr-ready .mw-parser-output {
+html.dsfr-ready body {
     opacity: 1;
-    transition: opacity 0.15s ease;
     animation: none;
 }
 
-/* Ne pas masquer les pages d'édition (le masque ne s'y applique pas) */
-.action-edit .mw-parser-output,
-.action-submit .mw-parser-output {
-    opacity: 1 !important;
-    animation: none !important;
-    transition: none !important;
+/* --- Overlay fond --- */
+html::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5f5fe;
+    z-index: 99999;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    animation: dsfr-failsafe-overlay 0s ease-out 4s forwards;
+}
+
+/* --- Spinner DSFR --- */
+html::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+    border: 4px solid #e3e3fd;
+    border-top-color: #000091;
+    border-radius: 50%;
+    z-index: 100000;
+    pointer-events: none;
+    animation: dsfr-spin 0.8s linear infinite, dsfr-failsafe-overlay 0s ease-out 4s forwards;
+}
+
+/* --- Revelation : masquer overlay + spinner --- */
+html.dsfr-ready::before,
+html.dsfr-ready::after {
+    opacity: 0;
+    visibility: hidden;
+    animation: none;
+}
+
+/* --- Animations --- */
+@keyframes dsfr-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes dsfr-failsafe-body {
+    to { opacity: 1; }
+}
+
+@keyframes dsfr-failsafe-overlay {
+    to { opacity: 0; visibility: hidden; }
 }
 /* Vos styles personnalisés ci-dessous */
 table.sortable tr:nth-child(even) {

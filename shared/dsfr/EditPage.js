@@ -93,7 +93,7 @@
             /* --- Component Picker: Group accordion header --- */
             '.dsfr-comp-group-hd{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.75rem;cursor:pointer;background:#fff;border-bottom:1px solid #f0f0f0;font-weight:500;font-size:0.8125rem;color:#161616;transition:background 0.1s;}' +
             '.dsfr-comp-group-hd:hover{background:#f5f5fe;}' +
-            '.dsfr-comp-group-hd .dsfr-comp-icon{width:1rem;height:1rem;flex-shrink:0;color:#000091;}' +
+            '.dsfr-comp-ico{width:1.125rem;text-align:center;flex-shrink:0;font-size:0.875rem;line-height:1;}' +
             '.dsfr-comp-group-hd .dsfr-comp-label{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}' +
             '.dsfr-comp-group-hd .dsfr-comp-count{background:#e3e3fd;color:#000091;font-size:0.625rem;font-weight:700;padding:0.1rem 0.35rem;border-radius:999px;min-width:1.1rem;text-align:center;flex-shrink:0;}' +
             '.dsfr-comp-group-arrow{font-size:0.5rem;transition:transform 0.15s;display:inline-block;flex-shrink:0;color:#999;}' +
@@ -106,7 +106,6 @@
             /* --- Component Picker: Direct link (no sub-items) --- */
             '.dsfr-comp-direct-lk{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.75rem;color:#161616;text-decoration:none;border-bottom:1px solid #f0f0f0;font-size:0.8125rem;transition:background 0.1s;}' +
             '.dsfr-comp-direct-lk:hover{background:#f5f5fe;color:#000091;}' +
-            '.dsfr-comp-direct-lk .dsfr-comp-icon{width:1rem;height:1rem;flex-shrink:0;color:#000091;}' +
             '#dsfr-editor-wrap{display:flex !important;align-items:stretch !important;position:relative !important;}' +
             '#dsfr-editor-wrap .CodeMirror{flex:1 !important;min-width:0 !important;border-radius:0 0.25rem 0.25rem 0 !important;}';
 
@@ -574,39 +573,39 @@
             }
         ];
 
-        // Icon mapping for each component
+        // Emoji icon mapping for each component (always renders, no DSFR font dependency)
         var componentIcons = {
-            'Accordéon': 'fr-icon-arrow-down-s-line',
-            'Alerte': 'fr-icon-alert-line',
-            'Badge': 'fr-icon-price-tag-3-line',
-            'Bandeau (Notice)': 'fr-icon-information-line',
-            'Bouton': 'fr-icon-cursor-line',
-            'Bouton radio': 'fr-icon-radio-button-line',
-            'Carte': 'fr-icon-layout-grid-line',
-            'Case à cocher': 'fr-icon-checkbox-line',
-            'Champ de saisie': 'fr-icon-edit-line',
-            'Citation enrichie': 'fr-icon-quote-line',
-            'Contrôle segmenté': 'fr-icon-menu-line',
-            'Groupe de formulaire': 'fr-icon-file-list-line',
-            'Indicateur d\'étapes': 'fr-icon-flag-line',
-            'Infobulle': 'fr-icon-question-line',
-            'Interrupteur (Toggle)': 'fr-icon-toggle-line',
-            'Lien DSFR': 'fr-icon-link',
-            'Liste déroulante (Select)': 'fr-icon-arrow-down-s-line',
-            'Menu déroulant (Dropdown)': 'fr-icon-menu-2-line',
-            'Mise en avant (Callout)': 'fr-icon-lightbulb-line',
-            'Mise en exergue (Highlight)': 'fr-icon-mark-pen-line',
-            'Modale': 'fr-icon-window-line',
-            'Onglets': 'fr-icon-tab-line',
-            'Pagination': 'fr-icon-skip-forward-line',
-            'Partage': 'fr-icon-share-line',
-            'Sommaire automatique': 'fr-icon-list-ordered',
-            'Tableau': 'fr-icon-table-line',
-            'Tag / Étiquette': 'fr-icon-price-tag-3-line',
-            'Téléchargement': 'fr-icon-download-line',
-            'Téléversement (Upload)': 'fr-icon-upload-line',
-            'Transcription': 'fr-icon-file-text-line',
-            'Tuile': 'fr-icon-dashboard-line'
+            'Accordéon': '\u25BC',
+            'Alerte': '\u26A0',
+            'Badge': '\uD83C\uDFF7',
+            'Bandeau (Notice)': '\u2139',
+            'Bouton': '\uD83D\uDD18',
+            'Bouton radio': '\u25CE',
+            'Carte': '\uD83C\uDFC3',
+            'Case à cocher': '\u2611',
+            'Champ de saisie': '\u270E',
+            'Citation enrichie': '\u275D',
+            'Contrôle segmenté': '\u2630',
+            'Groupe de formulaire': '\uD83D\uDCCB',
+            'Indicateur d\'étapes': '\uD83D\uDEA9',
+            'Infobulle': '\u2753',
+            'Interrupteur (Toggle)': '\uD83D\uDD00',
+            'Lien DSFR': '\uD83D\uDD17',
+            'Liste déroulante (Select)': '\u25BE',
+            'Menu déroulant (Dropdown)': '\u2630',
+            'Mise en avant (Callout)': '\uD83D\uDCA1',
+            'Mise en exergue (Highlight)': '\uD83D\uDD8D',
+            'Modale': '\uD83D\uDDBC',
+            'Onglets': '\uD83D\uDCC1',
+            'Pagination': '\u23ED',
+            'Partage': '\uD83D\uDD00',
+            'Sommaire automatique': '\uD83D\uDCD1',
+            'Tableau': '\uD83D\uDCCA',
+            'Tag / Étiquette': '\uD83C\uDFF7',
+            'Téléchargement': '\u2B07',
+            'Téléversement (Upload)': '\u2B06',
+            'Transcription': '\uD83D\uDCC4',
+            'Tuile': '\u25A6'
         };
 
         // Build a lookup: label → group data
@@ -622,13 +621,13 @@
                 var group = groupLookup[compLabel];
                 if (!group) return; // safety
 
-                var icon = componentIcons[compLabel] || 'fr-icon-apps-line';
+                var icon = componentIcons[compLabel] || '\u25A0';
                 var $item = $('<li data-comp-label="' + compLabel.toLowerCase() + '"></li>');
 
                 if (group.items) {
-                    // Accordion header with icon + count badge
+                    // Accordion header with emoji icon + count badge
                     var $hd = $('<div class="dsfr-comp-group-hd">' +
-                        '<span class="dsfr-comp-icon ' + icon + '" aria-hidden="true"></span>' +
+                        '<span class="dsfr-comp-ico" aria-hidden="true">' + icon + '</span>' +
                         '<span class="dsfr-comp-label">' + group.label + '</span>' +
                         '<span class="dsfr-comp-count">' + group.items.length + '</span>' +
                         '<span class="dsfr-comp-group-arrow">&#9658;</span>' +
@@ -656,7 +655,7 @@
                     $item.append($hd).append($body);
                 } else {
                     var $link = $('<a href="#" class="dsfr-comp-direct-lk">' +
-                        '<span class="dsfr-comp-icon ' + icon + '" aria-hidden="true"></span>' +
+                        '<span class="dsfr-comp-ico" aria-hidden="true">' + icon + '</span>' +
                         group.label +
                     '</a>');
                     (function(g) {
@@ -677,7 +676,7 @@
         $menuList.append($noResults);
 
         // Documentation link footer
-        var $docItem = $('<li style="position:sticky;bottom:0;"><a href="https://www.systeme-de-design.gouv.fr/version-courante/fr/composants" target="_blank" style="display:flex;align-items:center;gap:0.35rem;padding:0.5rem 0.75rem;color:#000091;font-weight:600;text-decoration:none;background:#f5f5fe;border-top:1px solid #e3e3fd;font-size:0.75rem;"><span class="fr-icon-external-link-line" aria-hidden="true" style="width:0.875rem;height:0.875rem;"></span>Documentation officielle</a></li>');
+        var $docItem = $('<li style="position:sticky;bottom:0;"><a href="https://www.systeme-de-design.gouv.fr/version-courante/fr/composants" target="_blank" style="display:flex;align-items:center;gap:0.35rem;padding:0.5rem 0.75rem;color:#000091;font-weight:600;text-decoration:none;background:#f5f5fe;border-top:1px solid #e3e3fd;font-size:0.75rem;"><span aria-hidden="true" style="font-size:0.75rem;">\u2197</span>Documentation officielle</a></li>');
         $menuList.append($docItem);
 
         // Assemble menu
