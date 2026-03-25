@@ -533,9 +533,32 @@ body {
   padding-bottom: 0;
 }
 
+/* Annule le padding du fr-menu__list (direct child) hérité des accordéons */
 .fr-nav .fr-collapse > *,
 .fr-nav .fr-menu > * {
   padding: 0;
+}
+
+/* Padding du panneau dropdown lui-même (breathing room haut/bas) */
+.fr-nav .fr-menu.fr-collapse--expanded {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Padding des liens dans les volets nav — corrige l'absence de padding DSFR natif */
+.fr-nav .fr-menu .fr-nav__link,
+.fr-nav .fr-menu__list .fr-nav__link {
+  display: block !important;
+  padding: 0.75rem 1.5rem 0.75rem 1rem !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* Corrige le padding-left: 0 !important hérité de la règle .fr-nav li générale */
+.fr-nav .fr-menu__list li,
+.fr-nav .fr-menu li {
+  padding-left: 0 !important; /* Le padding est sur le <a>, pas le <li> */
+  margin: 0 !important;
 }
 
 /* Align simple nav links (like Accueil) with dropdown buttons */
@@ -661,7 +684,6 @@ a:active,
 #content a,
 #mw-content-text a {
   text-decoration: underline !important;
-  text-underline-position: under !important;
   text-decoration-skip-ink: auto !important;
   text-underline-offset: 0.15em !important;
   border-bottom: none !important; /* Fix double underline */
@@ -1252,7 +1274,6 @@ body.action-submit .mw-editTools {
 body.action-edit .mw-editTools a,
 body.action-submit .mw-editTools a {
   color: #000091 !important;
-  text-underline-position: under !important;
 }
 
 /* --------------------------------------------------------
@@ -1541,7 +1562,6 @@ body.action-submit .mw-editTools a {
 .ve-ce-documentNode a {
   color: #000091 !important;
   text-decoration: underline !important;
-  text-underline-position: under !important;
 }
 
 /* Lists in VE */
